@@ -52,16 +52,29 @@
   </p>
 </footer>
 
+
 <script>
 function sendMessage(e) {
   e.preventDefault();
 
-  document.getElementById("status").innerText =
-    "Message sent successfully (demo only).";
+  let name = document.getElementById("name").value;
+  let email = document.getElementById("email").value;
+  let message = document.getElementById("message").value;
 
-  e.target.reset();
+  let subject = encodeURIComponent("Contact from " + name);
+  let body = encodeURIComponent(
+    "Name: " + name + "\n" +
+    "Email: " + email + "\n\n" +
+    "Message:\n" + message
+  );
+
+  let gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=riazart3@gmail.com&su=${subject}&body=${body}`;
+
+  window.open(gmailUrl, "_blank");
 }
 </script>
+
+
 
 </body>
 </html>
