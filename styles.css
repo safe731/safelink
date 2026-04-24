@@ -20,11 +20,26 @@ header {
     z-index: 100;
 }
 
+
 #header-timer,
 #middle-timer,
 #destination-section {
   display: none;
 }
+#hero {
+  display: block;
+}
+.timer-section.active {
+  display: block;
+}
+.timer-section {
+  display: none;
+}
+
+.timer-section.active {
+  display: block;
+}
+
 
 
 nav {
