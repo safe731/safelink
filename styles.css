@@ -20,6 +20,13 @@ header {
     z-index: 100;
 }
 
+#header-timer,
+#middle-timer,
+#destination-section {
+  display: none;
+}
+
+
 nav {
     max-width: 1280px;
     margin: 0 auto;
