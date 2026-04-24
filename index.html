@@ -1,20 +1,201 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" itemscope itemtype="https://schema.org/WebApplication">
 <head>
-  <title>Safelink Generator</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SafeLinkPro creates secure, timed links for safe sharing without signup.">
+    <meta name="keywords" content="SafeLink, secure links, timed redirects, URL shortener">
+    <meta name="author" content="Techlystb">
+    <title>SafeLinkPro - Secure Links</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0000000000000000" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Techlystb SafeLink",
+  "description": "Techlystb দ্বারা তৈরি একটি safelink system যেখানে secure ও timed link তৈরি করা যায় সহজে এবং দ্রুত।",
+  "url": "https://techlystb.blogspot.com",
+  "applicationCategory": "Utility",
+  "operatingSystem": "All",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "creator": {
+    "@type": "Organization",
+    "name": "Techlystb",
+    "url": "https://techlystb.blogspot.com",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "Customer Support",
+      "areaServed": "Global",
+      "availableLanguage": ["English", "Bengali"]
+    }
+  },
+  "featureList": [
+    "Secure link generation",
+    "Timed redirect system",
+    "Safe browsing experience",
+    "No signup required"
+  ]
+}
+</script>
+
 </head>
 <body>
+    <header>
+        <nav aria-label="Main navigation">
+            <div class="logo" itemprop="name">SafeLinkPro</div>
+            <div class="nav-links">
+                <a href="#hero" class="active" aria-current="page">Home</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
 
-<div class="box">
-  <h2>Safelink Generator</h2>
-  
-  <input type="text" id="url" placeholder="Enter your URL">
-  <button onclick="generate()">Generate</button>
+    <section id="header-timer" class="timer-section" aria-hidden="true">
+        <p>Checking link... <span id="header-timer-count">30</span>s</p>
+        <div id="header-spinner" class="loading-spinner" role="status" aria-label="Loading"></div>
+        <p id="header-timer-text" style="display: none;">Please wait</p>
+        <button id="robot-button" class="cta-button" aria-label="Verify not a robot">I'm not a robot</button>
+    </section>
 
-  <p id="result"></p>
-</div>
+    <section id="hero" class="hero" itemscope itemtype="https://schema.org/WebPageElement">
+        <div class="hero-content" itemprop="mainContentOfPage">
+            <h1>Secure Links with Timers</h1>
+            <p>Create safe, timed links to share securely without signup.</p>
+            <div class="url-input">
+                <div class="input-group">
+                    <span class="input-icon" aria-hidden="true">🔗</span>
+                    <input type="url" id="destination-url" placeholder="Enter URL to shorten" aria-label="URL to shorten" required>
+                </div>
+                <div class="input-group">
+                    <span class="input-icon" aria-hidden="true">⏱️</span>
+                    <select id="timer-duration" aria-label="Select timer duration">
+                        <option value="15">15s</option>
+                        <option value="30" selected>30s</option>
+                        <option value="45">45s</option>
+                        <option value="60">60s</option>
+                    </select>
+                </div>
+                <button class="cta-button" onclick="generateSafeLink()" aria-label="Generate SafeLink">Generate SafeLink</button>
+                <div id="safelink-output" style="display: none;">
+                    <input id="safelink-text" readonly aria-label="Generated SafeLink">
+                </div>
+                <button id="copy-button" class="copy-button" onclick="copySafeLink()" style="display: none;" aria-label="Copy SafeLink">Copy Link</button>
+                <button id="share-toggle" class="share-toggle" onclick="toggleShare()" style="display: none;" aria-label="Toggle share options">Share Link</button>
+                <div id="social-share" class="social-share" style="display: none;">
+                    <button class="share-button twitter" onclick="shareOnTwitter()" aria-label="Share on Twitter">Share on Twitter</button>
+                    <button class="share-button whatsapp" onclick="shareOnWhatsApp()" aria-label="Share on WhatsApp">Share on WhatsApp</button>
+                    <button class="share-button linkedin" onclick="shareOnLinkedIn()" aria-label="Share on LinkedIn">Share on LinkedIn</button>
+                </div>
+                <div id="error-message" class="error-message" role="alert"></div>
+            </div>
+        </div>
+    </section>
 
-<script src="script.js"></script>
+    <section id="how-it-works" class="how-it-works" itemscope itemtype="https://schema.org/WebPageElement">
+        <h2 itemprop="name">How It Works</h2>
+        <div class="steps-container">
+            <div class="step" itemscope itemtype="https://schema.org/HowToStep">
+                <div class="step-icon">1</div>
+                <h3 itemprop="name">Create</h3>
+                <p itemprop="description">Enter a URL and select a timer duration.</p>
+            </div>
+            <div class="step" itemscope itemtype="https://schema.org/HowToStep">
+                <div class="step-icon">2</div>
+                <h3 itemprop="name">Share</h3>
+                <p itemprop="description">Generate and share your secure link.</p>
+            </div>
+            <div class="step" itemscope itemtype="https://schema.org/HowToStep">
+                <div class="step-icon">3</div>
+                <h3 itemprop="name">Access</h3>
+                <p itemprop="description">Complete timers to visit the URL.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="middle-timer" class="timer-section" aria-hidden="true">
+        <p>Verifying... <span id="middle-timer-count">30</span>s</p>
+        <div id="middle-spinner" class="loading-spinner" role="status" aria-label="Verifying"></div>
+        <p id="middle-timer-text" style="display: none;">Please wait</p>
+        <button id="verify-button" class="cta-button" aria-label="Verify link">Verify</button>
+    </section>
+
+    <section id="features" class="features" itemscope itemtype="https://schema.org/WebPageElement">
+        <h2 itemprop="name">Why SafeLinkPro?</h2>
+        <div class="feature-grid">
+            <div class="feature-card" itemscope itemtype="https://schema.org/Feature">
+                <h3 itemprop="name">Secure</h3>
+                <p itemprop="description">HTTPS and encoded URLs for safety.</p>
+            </div>
+            <div class="feature-card" itemscope itemtype="https://schema.org/Feature">
+                <h3 itemprop="name">Simple</h3>
+                <p itemprop="description">Easy-to-use interface, no signup needed.</p>
+            </div>
+            <div class="feature-card" itemscope itemtype="https://schema.org/Feature">
+                <h3 itemprop="name">Customizable</h3>
+                <p itemprop="description">Choose timer durations from 15 to 60 seconds.</p>
+            </div>
+            <div class="feature-card" itemscope itemtype="https://schema.org/Feature">
+                <h3 itemprop="name">Shareable</h3>
+                <p itemprop="description">Share links via social media or copy.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="destination-section" class="timer-section" aria-hidden="true">
+        <p>Ready in <span id="footer-timer-count">30</span>s</p>
+        <div id="footer-spinner" class="loading-spinner" role="status" aria-label="Preparing link"></div>
+        <p id="footer-timer-text" style="display: none;">Almost there</p>
+        <button id="ready-button" class="cta-button" aria-label="Ready to visit">I'm Ready</button>
+        <a id="destination-link" class="destination-link" itemprop="url">Visit Destination</a>
+    </section>
+
+    <section id="faq" class="faq" itemscope itemtype="https://schema.org/FAQPage">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <details class="faq-item" itemscope itemtype="https://schema.org/Question">
+                <summary itemprop="name">What is SafeLinkPro?</summary>
+                <p itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">SafeLinkPro creates secure, timed links that you can share with anyone.</p>
+            </details>
+            <details class="faq-item" itemscope itemtype="https://schema.org/Question">
+                <summary itemprop="name">How do I use it?</summary>
+                <p itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">Enter a URL, choose a timer duration, generate a SafeLink, and share it.</p>
+            </details>
+            <details class="faq-item" itemscope itemtype="https://schema.org/Question">
+                <summary itemprop="name">Is it free?</summary>
+                <p itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">Yes, SafeLinkPro is completely free to use.</p>
+            </details>
+            <details class="faq-item" itemscope itemtype="https://schema.org/Question">
+                <summary itemprop="name">Can I set timer durations?</summary>
+                <p itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">Yes, choose from 15, 30, 45, or 60 seconds.</p>
+            </details>
+            <details class="faq-item" itemscope itemtype="https://schema.org/Question">
+                <summary itemprop="name">Is it secure?</summary>
+                <p itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">SafeLinkPro uses HTTPS and encoded URLs with no data storage.</p>
+            </details>
+            <details class="faq-item" itemscope itemtype="https://schema.org/Question">
+                <summary itemprop="name">How to contact support?</summary>
+                <p itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">Email freeprivacypolicygeneratortool@gmail.com or write to It Is Unique Official, Parbhani, Maharashtra, India (PIN: 431401).</p>
+            </details>
+        </div>
+    </section>
+
+    <!--[ <div class="ad-slot" aria-hidden="true">Advertisement</div> ]-->
+
+    <footer id="contact" itemscope itemtype="https://schema.org/Organization">
+        <p><a href="mailto:aveestb@gmail.com" itemprop="email">aveestb@gmail.com</a> | <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress"><span itemprop="addressLocality">Parbhani</span>, <span itemprop="addressRegion">aveestb</span>, <span itemprop="addressCountry">BD</span> (<span itemprop="postalCode">8300</span>)</span></p>
+        <p>© 2026 <span itemprop="name">SafeLinkPro</span> | <a href="#" itemprop="url">Privacy</a> | <a href="#" itemprop="url">Terms</a></p>
+    </footer>
+
+    <div id="toast" class="toast" role="alert"></div>
+
+    <script src="script.js"></script>
 </body>
 </html>
